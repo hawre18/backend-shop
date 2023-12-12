@@ -14,3 +14,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::resource('baners','App\Http\Controllers\admin\BanerController');
+Route::resource('categories','App\Http\Controllers\admin\CategoryController');

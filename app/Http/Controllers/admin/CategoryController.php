@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories=Category::with('childrenRecursive')
+            ->where('parent_id',null)->paginate(20);
+        return view('index.admin.categories.index',compact('categories'));
     }
 
     /**
@@ -25,7 +28,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        $categories=Category::all();
+        return view('index.admin.categories.create',compact(['categories']));
     }
 
     /**
@@ -36,7 +40,12 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $category=new Category();
+        $category->name=$request->input('name');
+        $category->title=$request->input('title');
+        $category->parent_id=$request->input('parent_id');
+        $category->save();
+        return 'ok';
     }
 
     /**
@@ -56,9 +65,10 @@ class CategoryController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit($id)
     {
-        //
+        $category=Category::findorfail($id);
+        return view('index.admin.categories.update',compact(['category']));
     }
 
     /**
@@ -79,8 +89,10 @@ class CategoryController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        //
+        $category=Category::findorfail($id);
+        $category->delete();
+        return 'ok';
     }
 }

@@ -15,6 +15,11 @@ class CreateBanersTable extends Migration
     {
         Schema::create('baners', function (Blueprint $table) {
             $table->id();
+            $table->string('title')->nullable();
+            $table->string('description')->nullable();
+            $table->string('status');
+            $table->integer('image_id')->unsigned();
+            $table->foreign('image_id')->references('id')->on('images')->onDelete('cascade');
             $table->timestamps();
         });
     }

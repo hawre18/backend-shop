@@ -15,7 +15,8 @@
         <div class="row">
             <div class="col-md-12 ">
                 <div class="card border-0 p-4 rounded shadow">
-                    <form >
+                    <form action="{{url('categories')}}" method="post">
+                        @csrf
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
@@ -26,11 +27,22 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label class="form-label"> عنوان</label>
-                                    <input name="name" id="title" type="text" class="form-control" placeholder="عنوان">
+                                    <input name="title" id="title" type="text" class="form-control" placeholder="عنوان">
                                 </div>
                             </div><!--end col-->
                         </div><!--end row-->
 
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">دسته بندی والد</label>
+                                <select name="parent_id" class="form-control select2input">
+                                    <option disabled selected>انتخاب کنید</option>
+                                    @foreach($categories as $row)
+                                    <option value="{{$row->id}}">{{$row->title}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div><!--end col-->
                         <button type="submit" class="btn btn-primary">افزودن دسته بندی</button>
                     </form>
                 </div>

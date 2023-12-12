@@ -27,27 +27,29 @@
                             </tr>
                             </thead>
                             <tbody>
+                            @foreach($categories as $row)
                             <tr>
-                                <th class="p-3">1</th>
+                                <th class="p-3">{{$loop->index+1}}</th>
                                 <td class="py-3">
                                     <a href="#" class="text-dark">
                                         <div class="d-flex align-items-center">
-                                            <span class="me-2">هاوارد تونر</span>
+                                            <span class="me-2">{{$row->name}}</span>
                                         </div>
                                     </a>
                                 </td>
-                                <td class="p-3">25</td>
+                                <td class="p-3">{{$row->title}}</td>
                                 <td class="text-start">
                                     <a href="#" class="btn btn-icon btn-pills btn-soft-primary"
                                        data-bs-toggle="modal" data-bs-target="#viewprofile"><i
                                             class="uil uil-eye"></i></a>
-                                    <a href="#" class="btn btn-icon btn-pills btn-soft-success"
-                                       data-bs-toggle="modal" data-bs-target="#editprofile"><i
-                                            class="uil uil-pen"></i></a>
-                                    <a href="#" class="btn btn-icon btn-pills btn-soft-danger"><i
-                                            class="uil uil-trash"></i></a>
+                                    <a href="{{route('categories.edit',$row->id)}}" class="btn btn-icon btn-pills btn-soft-success"><i class="uil uil-pen"></i></a>
+                                    <a href="{{route('categories.destroy',$row->id)}}" class="btn btn-icon btn-pills btn-soft-danger"><i class="uil uil-trash"></i></a>
                                 </td>
                             </tr>
+                                    @if(count($row->childrenRecursive)>0)
+                                        @include('index.admin.categories.subCategory',['categories'=>$row->childrenRecursive , 'level'=>1 ])
+                                    @endif
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
