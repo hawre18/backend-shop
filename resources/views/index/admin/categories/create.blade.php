@@ -15,7 +15,16 @@
         <div class="row">
             <div class="col-md-12 ">
                 <div class="card border-0 p-4 rounded shadow">
-                    <form action="{{url('categories')}}" method="post">
+                    @if($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach($errors->all() as $error )
+                                    <li>{{$error}}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    <form action="{{url('admin/categories')}}" method="post">
                         @csrf
                         <div class="row">
                             <div class="col-md-6">

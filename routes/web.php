@@ -13,5 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::resource('baners','App\Http\Controllers\admin\BanerController');
-Route::resource('categories','App\Http\Controllers\admin\CategoryController');
+
+Route::group(['prefix'=>'admin','namespace'=>'App\Http\Controllers\admin'],function (){
+    Route::resource('baners','BanerController');
+    Route::resource('categories','CategoryController');
+    Route::get('categories/delete/{id}','CategoryController@delete')->name('categories.delete');
+});

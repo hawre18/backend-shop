@@ -17,6 +17,16 @@
             <div class="row">
                 <div class="col-12 mt-4">
                     <div class="table-responsive shadow rounded">
+                        @if(Session::has('category_success'))
+                            <div class="alert alert-success">
+                                <div>{{session('category_success')}}</div>
+                            </div>
+                        @endif
+                            @if(Session::has('category_error'))
+                                <div class="alert alert-success">
+                                    <div>{{session('category_error')}}</div>
+                                </div>
+                            @endif
                         <table class="table table-center bg-white mb-0">
                             <thead>
                             <tr>
@@ -43,7 +53,7 @@
                                        data-bs-toggle="modal" data-bs-target="#viewprofile"><i
                                             class="uil uil-eye"></i></a>
                                     <a href="{{route('categories.edit',$row->id)}}" class="btn btn-icon btn-pills btn-soft-success"><i class="uil uil-pen"></i></a>
-                                    <a href="{{route('categories.destroy',$row->id)}}" class="btn btn-icon btn-pills btn-soft-danger"><i class="uil uil-trash"></i></a>
+                                    <a href="{{route('categories.delete',$row->id)}}" class="btn btn-icon btn-pills btn-soft-danger"><i class="uil uil-trash"></i></a>
                                 </td>
                             </tr>
                                     @if(count($row->childrenRecursive)>0)
