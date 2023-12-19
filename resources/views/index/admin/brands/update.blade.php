@@ -30,6 +30,12 @@
                                     <textarea name="description" id="comments" rows="3" class="form-control"></textarea>
                                 </div>
                             </div>
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label class="form-label">لوگو برند</label>
+                                    <input name="image" type="file">
+                                </div>
+                            </div>
                         </div><!--end row-->
 
                         <button type="submit" class="btn btn-primary">ویرایش برند</button>

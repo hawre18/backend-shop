@@ -2,7 +2,7 @@
 @section('content')
     <div class="layout-specing">
         <div class="d-md-flex justify-content-between">
-            <h5 class="mb-0">افزودن برند جدید</h5>
+            <h5 class="mb-0">ویرایش کروه ویژگی ها</h5>
 
             <nav aria-label="breadcrumb" class="d-inline-block mt-4 mt-sm-0">
                 <ul class="breadcrumb bg-transparent rounded mb-0 p-0">
@@ -19,27 +19,21 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label class="form-label"> نام</label>
-                                    <input name="name" id="name" type="text" class="form-control" placeholder="نام">
+                                    <label class="form-label"> عنوان</label>
+                                    <input name="title" id="name" type="text" class="form-control" placeholder="عنوان">
                                 </div>
                             </div><!--end col-->
 
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label class="form-label">توضیحات برند</label>
-                                    <textarea name="description" id="comments" rows="3" class="form-control"></textarea>
+                                    <label class="form-label">نام</label>
+                                    <input name="name" id="name2" type="text" class="form-control" placeholder="لینک :">
                                 </div>
-                            </div>
+                            </div><!--end col-->
 
-                            <div class="col-md-12">
-                                <div class="mb-3">
-                                    <label class="form-label">لوگو برند</label>
-                                    <input type="file" name="image">
-                                </div>
-                            </div>
                         </div><!--end row-->
 
-                        <button type="submit" class="btn btn-primary">افزودن برند</button>
+                        <button type="submit" class="btn btn-primary">ویرایش</button>
                     </form>
                 </div>
             </div><!--end col-->

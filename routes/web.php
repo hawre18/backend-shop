@@ -19,3 +19,4 @@ Route::group(['prefix'=>'admin','namespace'=>'App\Http\Controllers\admin'],funct
     Route::resource('categories','CategoryController');
     Route::get('categories/delete/{id}','CategoryController@delete')->name('categories.delete');
 });
+

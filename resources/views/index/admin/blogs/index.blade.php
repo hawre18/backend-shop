@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="layout-specing">
             <div class="d-md-flex justify-content-between">
-                <h5 class="mb-0">لیست برندها</h5>
+                <h5 class="mb-0">لیست اخبار</h5>
 
                 <nav aria-label="breadcrumb" class="d-inline-block mt-4 mt-sm-0">
                     <ul class="breadcrumb bg-transparent rounded mb-0 p-0">
@@ -21,7 +21,7 @@
                             <thead>
                             <tr>
                                 <th class="border-bottom p-3" style="min-width: 50px;">ردیف</th>
-                                <th class="border-bottom p-3" style="min-width: 180px;">نام</th>
+                                <th class="border-bottom p-3" style="min-width: 180px;">عنوان</th>
                                 <th class="border-bottom p-3">عملیات</th>
                             </tr>
                             </thead>
