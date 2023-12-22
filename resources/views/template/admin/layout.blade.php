@@ -32,6 +32,8 @@
     <link href="{{asset('admin/assets/css/slick.css')}}" rel="stylesheet">
     <link href="{{asset('admin/assets/css/slick-theme.css')}}" rel="stylesheet">
 
+    <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.js"></script>
+
 </head>
 
 <body>
@@ -182,6 +184,14 @@
 <script src="{{asset('admin/assets/js/tiny-slider-init.js')}}"></script>
 <script src="{{asset('admin/assets/js/slick.min.js')}}"></script>
 <script src="{{asset('admin/assets/js/slick.init.js')}}"></script>
+
+<script>
+        ClassicEditor
+            .create( document.querySelector( '#comments' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
 
 </body>
 

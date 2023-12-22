@@ -23,7 +23,7 @@
                             </div>
                         @endif
                             @if(Session::has('category_error'))
-                                <div class="alert alert-success">
+                                <div class="alert alert-error">
                                     <div>{{session('category_error')}}</div>
                                 </div>
                             @endif

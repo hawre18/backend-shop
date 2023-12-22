@@ -15,7 +15,23 @@
         <div class="row">
             <div class="col-md-12 ">
                 <div class="card border-0 p-4 rounded shadow">
-                    <form >
+                @if(Session::has('blog_error'))
+                                <div class="alert alert-error">
+                                    <div>{{session('blog_error')}}</div>
+                                </div>
+                            @endif
+                @if($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach($errors->all() as $error )
+                                    <li>{{$error}}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    <form action="{{route('blogs.update',$blog->id)}}" method="post">
+                    {{csrf_field()}}
+                        {{method_field('PATCH')}}
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">

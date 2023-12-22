@@ -15,7 +15,22 @@
         <div class="row">
             <div class="col-md-12 ">
                 <div class="card border-0 p-4 rounded shadow">
-                    <form >
+                @if(Session::has('blog_error'))
+                                <div class="alert alert-error">
+                                    <div>{{session('blog_error')}}</div>
+                                </div>
+                            @endif
+                @if($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach($errors->all() as $error )
+                                    <li>{{$error}}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    <form action="{{url('admin/blogs')}}" method="post">
+                        @csrf
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
@@ -34,7 +49,7 @@
                             <div class="col-md-12">
                                 <div class="mb-3">
                                     <label class="form-label">عکس خبر</label>
-                                    <input type="file" name="image">
+                                    <input type="file" name="image_id">
                                 </div>
                             </div>
                         </div><!--end row-->
