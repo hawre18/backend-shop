@@ -7,7 +7,7 @@
             <nav aria-label="breadcrumb" class="d-inline-block mt-4 mt-sm-0">
                 <ul class="breadcrumb bg-transparent rounded mb-0 p-0">
                     <li class="breadcrumb-item"><a href="index.html">داکتریس</a></li>
-                    <li class="breadcrumb-item"><a href="doctors.html">پزشکان</a></li>
+                    <li class="breadcrumb-item"><a href="doctors.html">برنامه نویسان</a></li>
                     <li class="breadcrumb-item active" aria-current="page">افزودن پزشک</li>
                 </ul>
             </nav>
