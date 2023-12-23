@@ -51,7 +51,7 @@ class BlogController extends Controller
     {
         $this->validate(request(),[
             'title'=>'required|min:3|max:100|regex:/^[a-zA-Z0-9 آابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهیئ\s]+$/',
-            'image_id'=>'required',
+            
             
          ]);
          try{
@@ -103,7 +103,7 @@ class BlogController extends Controller
     {
         $this->validate(request(),[
             'title'=>'required|min:3|max:100|regex:/^[a-zA-Z0-9 آابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهیئ\s]+$/',
-            'image_id'=>'required',
+           
          ]);
          try{
              $blog=Blog::findorfail($id);
