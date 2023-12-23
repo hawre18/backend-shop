@@ -141,10 +141,6 @@
             </div>
         </div>
         <div class="container-fluid">
-
-
-
-
 @yield('content')
                 <!-- Footer Start -->
                 <footer class="bg-white shadow py-3">

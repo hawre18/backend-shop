@@ -5,6 +5,9 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Baner;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\View;
+use Symfony\Component\HttpFoundation\Response;
 
 class BanerController extends Controller
 {
@@ -15,9 +18,16 @@ class BanerController extends Controller
      */
     public function index()
     {
-        return view('index.admin.baners.show');
-    }
 
+
+        if (View::exists('index.admin.baners.index')){
+        $baners=Baner::with('childrenRecursive')
+            ->where('status','null')->paginate('20');
+        return view('index.admin.baners.index',compact(['baners']));
+    }else{
+            abort(Response::HTTP_NOT_FOUND);
+        }
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -25,7 +35,12 @@ class BanerController extends Controller
      */
     public function create()
     {
-        return view('index.admin.baners.create');
+        if (view::exists('index.admin.baners.create')){
+        $baners=Baner::all();
+        return view('index.admin.baners.create',compact(['baners']));
+        }else{
+            abort(Response::HTTP_NOT_FOUND);
+        }
     }
 
     /**
@@ -36,7 +51,22 @@ class BanerController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate(request(),[
+                 'title'=>'required|min:3|max:100|alpha',
 
+        ]);
+        try {
+           $baner=new Baner();
+           $baner->title=$request->input('title');
+           $baner->description=$request->input('description');
+           $baner->link=$request->input('link');
+           $baner->save();
+           Session::flash('baner_success','با موفقیت ایجاد شد');
+           return redirect('admin/baners');
+        }catch (\Exception $er){
+            Session::flash('baner_error','خطا در ذخیره سازی');
+            return redirect('admin/baners/create');
+        }
     }
 
     /**
@@ -56,9 +86,11 @@ class BanerController extends Controller
      * @param  \App\Models\Baner  $baner
      * @return \Illuminate\Http\Response
      */
-    public function edit(Baner $baner)
+    public function edit($id)
     {
-        //
+            $baners = Baner::all();
+            $baner=Baner::findordail($id);
+            return view('index.admin.baners.update',compact('baner','baners'));
     }
 
     /**
@@ -68,18 +100,45 @@ class BanerController extends Controller
      * @param  \App\Models\Baner  $baner
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Baner $baner)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate(request(),[
+            'title'=>'required|min:3|max:100|alpha',
+
+        ]);
+        try {
+            $baner=Baner::findorfail($id);
+            $baner->title=$request->input('title');
+            $baner->description=$request->input('description');
+            $baner->link=$request->input('link');
+            $baner->save();
+            Session::flash('baner_success','با موفقیت ایجاد شد');
+            return redirect('admin/baners');
+        }catch (\Exception $er){
+            Session::flash('baner_error','خطا در ذخیره سازی');
+            return Redirect()->back();
+        }
     }
 
+    public function delete($id)
+    {
+        try {
+            $baner = Baner::findorfail($id);
+            $baner->delete();
+            Session::flash('baner_success', 'عملیات موفقیت آمیز بود');
+            return redirect('admin/baners');
+        }catch (\Exception $er){
+            Session::flash('baner_error' ,'خطا در انجام عملیات');
+            return redirect('admin/baners');
+        }
+    }
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Baner  $baner
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Baner $baner)
+    public function destroy($id)
     {
         //
     }

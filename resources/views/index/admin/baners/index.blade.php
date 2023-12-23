@@ -17,6 +17,16 @@
                 <div class="row">
                     <div class="col-12 mt-4">
                         <div class="table-responsive shadow rounded">
+                            @if(Session::has('baner_success'))
+                                <div class="alert alert-success">
+                                </div>{{session('baner_success')}}</div>
+                              </div>
+                            @endif
+                            @if(Session::has('baner_error'))
+                                <div class="alert alert-error">
+                                </div>{{session('baner_error')}}</div>
+                             </div>
+                            @endif
                             <table class="table table-center bg-white mb-0">
                                 <thead>
                                 <tr>
@@ -29,31 +39,38 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @foreach($baners as $row)
                                 <tr>
-                                    <th class="p-3">1</th>
+                                    <th class="p-3">{{$loop->index+1}}</th>
                                     <td class="py-3">
                                         <a href="#" class="text-dark">
                                             <div class="d-flex align-items-center">
                                                 <img src="{{asset('admin/assets/images/client/01.jpg')}}"
                                                      class="avatar avatar-md-sm rounded-circle shadow" alt="">
-                                                <span class="me-2">هاوارد تونر</span>
+                                                <span class="me-2">{{$row->title}}</span>
                                             </div>
                                         </a>
                                     </td>
-                                    <td class="p-3">25</td>
-                                    <td class="p-3">مرد</td>
-                                    <td class="p-3"><span class="badge bg-soft-success">پذیرفته شده</span></td>
+                                    <td class="p-3">{{mb_substr($row->description,0,30).'...'}}</td>
+                                    <td class="p-3">{{$row->link}}</td>
+                                    <td class="p-3"><span class="badge bg-soft-success">{{$row->status}}</span></td>
                                     <td class="text-start">
                                         <a href="#" class="btn btn-icon btn-pills btn-soft-primary"
                                            data-bs-toggle="modal" data-bs-target="#viewprofile"><i
                                                 class="uil uil-eye"></i></a>
-                                        <a href="#" class="btn btn-icon btn-pills btn-soft-success"
-                                           data-bs-toggle="modal" data-bs-target="#editprofile"><i
-                                                class="uil uil-pen"></i></a>
-                                        <a href="#" class="btn btn-icon btn-pills btn-soft-danger"><i
-                                                class="uil uil-trash"></i></a>
+                                        <a href="{{route('baners.edit' ,$row->id)}}" class="btn btn-icon btn-pills btn-soft-success"></a>
+                                        <a href="{{route('baners.delete' ,$row->id)}}" class="btn btn-icon btn-pills btn-soft-danger"></a>
+                                        <form action="{{route('baners.delete' ,$row->id)}}" method="post"
+                                            {{csrf_field()}}
+                                            {{method_field('DELETE')}}
+                                            <button type="submit">DE</button>
+                                        </form>
                                     </td>
                                 </tr>
+                                @if(count($row->childrenRecursive)>0)
+                                    @include('index.admin.baners.subBaner',['baners'=>$row->childrenRecursive , 'level'=>1 ])
+                                    @endif
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

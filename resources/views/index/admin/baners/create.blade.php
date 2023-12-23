@@ -23,7 +23,17 @@
                                             <input name="title" id="name" type="text" class="form-control" placeholder="عنوان">
                                         </div>
                                     </div><!--end col-->
-
+                                       @if($errors->any())
+                                           <div class="alert alert-danger">
+                                           <ul>
+                                               @foreach($errors->all() as $error)
+                                                   <li>{{$error}}</li>
+                                               @endforeach
+                                           </ul>
+                                           </div>
+                                       @endif
+                                    <form action="{{url('admin/baners')}}" method="post"
+                                          @csrf
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">لینک</label>
@@ -36,8 +46,9 @@
                                             <label class="form-label">وضعیت</label>
                                             <select name="status" class="form-control select2input">
                                                 <option disabled selected>انتخاب کنید</option>
-                                                <option value="active">فعال</option>
-                                                <option value="deactive">غیرفعال</option>
+                                                @foreach($baners as $row)
+                                                <option value="{{$row->id}}">{{$row->title}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div><!--end col-->
