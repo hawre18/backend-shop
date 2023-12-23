@@ -19,6 +19,4 @@ Route::group(['prefix'=>'admin','namespace'=>'App\Http\Controllers\admin'],funct
     Route::resource('categories','CategoryController');
     Route::resource('baners','BanerController');
     Route::get('categories/delete/{id}','CategoryController@delete')->name('categories.delete');
-    Route::get('baners/delete/{id}','BanerController@delete')->name('baners.delete');
 });
-
