@@ -1,4 +1,7 @@
 @extends('template.admin.layout')
+@section('styles')
+<link href="{{asset('admin/assets/css/dropzone.css')}}" rel="stylesheet" type="text/css">
+@endsection
 @section('content')
     <div class="layout-specing">
         <div class="d-md-flex justify-content-between">
@@ -15,7 +18,8 @@
                 <div class="row">
                     <div class="col-md-12 ">
                         <div class="card border-0 p-4 rounded shadow">
-                            <form >
+                            <form action="{{url('admin/baners')}}" method="post" enctype="multipart/form-data">
+                                @csrf
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="mb-3">
@@ -45,17 +49,47 @@
                                     <div class="col-md-12">
                                         <div class="mb-3">
                                             <label class="form-label">توضیحات بنر</label>
-                                            <textarea name="description" id="comments" rows="3" class="form-control"></textarea>
+                                            <textarea name="description" id="editor" rows="3" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <label class="form-label">عکس بنر</label>
+                                        <input type="hidden" name="image_id" id="BanerImage">
+                                        <div id="image_baner" class="mb-3 dropzone">
                                         </div>
                                     </div>
                                 </div><!--end row-->
-
                                 <button type="submit" class="btn btn-primary">افزودن بنر</button>
                             </form>
                         </div>
                     </div><!--end col-->
                 </div><!--end row-->
          </div>
+@endsection
+@section('scripts')
+    <script src="{{asset('admin/assets/ckeditor/ckeditor.js')}}"></script>
+    <script type="text/javascript" src="{{asset('admin/assets/js/dropzone.js')}}"></script>
+    <script>
+        Dropzone.autoDiscover=false;
+        var drop=new Dropzone('#image_baner',{
+            maxFiles:1,
+            addRemoveLinks:true,
+            url:"{{route('banerImage.upload')}}",
+           sending:function (file,xhr,formDAta){
+                formDAta.append("_token","{{csrf_token()}}")
+           },
+            success:function (file,response){
+                document.getElementById('BanerImage').value=response.image_banerId
+            }
+        });
 
-
+        ClassicEditor
+            .create( document.querySelector( '#editor',{
+                
+            } ) )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
 @endsection

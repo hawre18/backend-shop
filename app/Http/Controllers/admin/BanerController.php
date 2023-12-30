@@ -5,7 +5,6 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Baner;
 use Illuminate\Http\Request;
-
 class BanerController extends Controller
 {
     /**
@@ -36,7 +35,14 @@ class BanerController extends Controller
      */
     public function store(Request $request)
     {
-
+        $baner=new Baner();
+        $baner->title=$request->input('title');
+        $baner->link=$request->input('link');
+        $baner->description=$request->input('description');
+        $baner->status=$request->input('status');
+        $baner->image_id=$request->input('image_id');
+        $baner->save();
+        return "save";
     }
 
     /**

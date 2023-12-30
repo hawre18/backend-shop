@@ -12,7 +12,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('login',function (){
+    return view('index.admin.auth.login');
+});
 
 Route::group(['prefix'=>'admin','namespace'=>'App\Http\Controllers\admin'],function (){
     Route::resource('baners','BanerController');
@@ -22,5 +24,6 @@ Route::group(['prefix'=>'admin','namespace'=>'App\Http\Controllers\admin'],funct
     Route::get('provinces/delete/{id}','ProvinceController@delete')->name('provinces.delete');
     Route::resource('cities','CityController');
     Route::get('cities/delete/{id}','CityController@delete')->name('cities.delete');
+    Route::post('images/upload/baner','ImageController@banerImageUpload')->name('banerImage.upload');
 });
 
