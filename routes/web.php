@@ -15,12 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::group(['prefix'=>'admin','namespace'=>'App\Http\Controllers\admin'],function (){
-    Route::resource('baners','BanerController');
-    Route::resource('categories','CategoryController');
-    Route::get('categories/delete/{id}','CategoryController@delete')->name('categories.delete');
-    Route::resource('provinces','ProvinceController');
-    Route::get('provinces/delete/{id}','ProvinceController@delete')->name('provinces.delete');
-    Route::resource('cities','CityController');
-    Route::get('cities/delete/{id}','CityController@delete')->name('cities.delete');
+    Route::resource('attributeGroups','AttributeController');
+    Route::get('attributeGroups/delete/{id}','AttributeController@delete')->name('attributeGroups.delete');
 });
+
 

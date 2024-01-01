@@ -17,6 +17,16 @@
                 <div class="row">
                     <div class="col-12 mt-4">
                         <div class="table-responsive shadow rounded">
+                            @if(Session::has('attribute_success'))
+                                <div class="alert alert-success">
+                                    <div>{{session('attribute_success')}}</div>
+                                </div>
+                            @endif
+                            @if(Session::has('attribute_error'))
+                                <div class="alert alert-success">
+                                    <div>{{session('attribute_error')}}</div>
+                                </div>
+                            @endif
                             <table class="table table-center bg-white mb-0">
                                 <thead>
                                 <tr>
@@ -27,27 +37,28 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @foreach($attributeGroups as $row)
                                 <tr>
-                                    <th class="p-3">1</th>
+                                    <th class="p-3">{{$loop->index+1}}</th>
                                     <td class="py-3">
                                         <a href="#" class="text-dark">
                                             <div class="d-flex align-items-center">
-                                                <span class="me-2">هاوارد تونر</span>
+                                                <span class="me-2">{{$row->title}}</span>
                                             </div>
                                         </a>
                                     </td>
-                                    <td class="p-3">25</td>
+                                    <td class="p-3">{{$row->name}}</td>
                                     <td class="text-start">
-                                        <a href="#" class="btn btn-icon btn-pills btn-soft-primary"
-                                           data-bs-toggle="modal" data-bs-target="#viewprofile"><i
-                                                class="uil uil-eye"></i></a>
-                                        <a href="#" class="btn btn-icon btn-pills btn-soft-success"
-                                           data-bs-toggle="modal" data-bs-target="#editprofile"><i
-                                                class="uil uil-pen"></i></a>
-                                        <a href="#" class="btn btn-icon btn-pills btn-soft-danger"><i
-                                                class="uil uil-trash"></i></a>
+                                        <a href="{{route('attributeGroups.edit',$row->id)}}" class="btn btn-icon btn-pills btn-soft-success"><i class="uil uil-pen"></i></a>
+                                        <a href="{{route('attributeGroups.delete',$row->id)}}" class="btn btn-icon btn-pills btn-soft-danger"><i class="uil uil-trash"></i></a>
+                                        <form action="{{route('attributeGroups.delete' ,$row->id)}}" method="post"
+                                        {{csrf_field()}}
+                                        {{method_field('DELETE')}}
+                                        <button type="submit">DE</button>
+                                        </form>
                                     </td>
                                 </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
