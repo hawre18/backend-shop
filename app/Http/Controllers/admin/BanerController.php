@@ -21,9 +21,8 @@ class BanerController extends Controller
 
 
         if (View::exists('index.admin.baners.index')){
-        $baners=Baner::with('childrenRecursive')
-            ->where('status','null')->paginate('20');
-        return view('index.admin.baners.index',compact(['baners']));
+        $baners=Baner::all();
+        return view('index.admin.baners.index',compact('baners'));
     }else{
             abort(Response::HTTP_NOT_FOUND);
         }
@@ -52,14 +51,16 @@ class BanerController extends Controller
     public function store(Request $request)
     {
         $this->validate(request(),[
-                 'title'=>'required|min:3|max:100|alpha',
+                 'title'=>'required|min:3|max:100|regex:/^[ آابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهیئ\s]+$/',
 
         ]);
         try {
            $baner=new Baner();
            $baner->title=$request->input('title');
            $baner->description=$request->input('description');
+           $baner->status=$request->input('status');
            $baner->link=$request->input('link');
+           $baner->image_id=$request->input('image_id');
            $baner->save();
            Session::flash('baner_success','با موفقیت ایجاد شد');
            return redirect('admin/baners');
@@ -89,8 +90,9 @@ class BanerController extends Controller
     public function edit($id)
     {
             $baners = Baner::all();
-            $baner=Baner::findordail($id);
+            $baner=Baner::findorfail($id);
             return view('index.admin.baners.update',compact('baner','baners'));
+
     }
 
     /**
@@ -103,7 +105,7 @@ class BanerController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate(request(),[
-            'title'=>'required|min:3|max:100|alpha',
+            'title'=>'required|min:3|max:100|regex:/^[ آابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهیئ\s]+$/',
 
         ]);
         try {

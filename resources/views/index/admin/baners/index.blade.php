@@ -17,10 +17,10 @@
                 <div class="row">
                     <div class="col-12 mt-4">
                         <div class="table-responsive shadow rounded">
-                            @if(Session::has('baner_success'))
+                            @if(session()->has('baner_success'))
                                 <div class="alert alert-success">
-                                </div>{{session('baner_success')}}</div>
-                              </div>
+                                    {{ session()->get('baner_success') }}
+                                </div>
                             @endif
                             @if(Session::has('baner_error'))
                                 <div class="alert alert-error">
@@ -32,8 +32,8 @@
                                 <tr>
                                     <th class="border-bottom p-3" style="min-width: 50px;">ردیف</th>
                                     <th class="border-bottom p-3" style="min-width: 180px;">عنوان</th>
-                                    <th class="border-bottom p-3">لینک</th>
                                     <th class="border-bottom p-3">توضیحات</th>
+                                    <th class="border-bottom p-3">لینک</th>
                                     <th class="border-bottom p-3">وضعیت</th>
                                     <th class="border-bottom p-3">عملیات</th>
                                 </tr>
@@ -58,19 +58,11 @@
                                         <a href="#" class="btn btn-icon btn-pills btn-soft-primary"
                                            data-bs-toggle="modal" data-bs-target="#viewprofile"><i
                                                 class="uil uil-eye"></i></a>
-                                        <a href="{{route('baners.edit' ,$row->id)}}" class="btn btn-icon btn-pills btn-soft-success"></a>
-                                        <a href="{{route('baners.delete' ,$row->id)}}" class="btn btn-icon btn-pills btn-soft-danger"></a>
-                                        <form action="{{route('baners.delete' ,$row->id)}}" method="post"
-                                            {{csrf_field()}}
-                                            {{method_field('DELETE')}}
-                                            <button type="submit">DE</button>
-                                        </form>
+                                        <a href="{{route('baners.edit',$row->id)}}" class="btn btn-icon btn-pills btn-soft-success"><i class="uil uil-pen"></i></a>
+                                        <a href="{{route('baners.delete',$row->id)}}" class="btn btn-icon btn-pills btn-soft-danger"><i class="uil uil-trash"></i></a>
                                     </td>
                                 </tr>
-                                @if(count($row->childrenRecursive)>0)
-                                    @include('index.admin.baners.subBaner',['baners'=>$row->childrenRecursive , 'level'=>1 ])
-                                    @endif
-                                    @endforeach
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>

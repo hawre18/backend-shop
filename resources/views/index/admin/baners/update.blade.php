@@ -51,17 +51,6 @@
                                     <label class="form-label">وضعیت</label>
                                     <select name="status" class="form-control select2input">
                                         <option disabled selected>انتخاب کنید</option>
-                                        @foreach($baners as $row)
-                                            <option value="{{$row->id}}">{{$row->title}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div><!--end col-->
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label class="form-label">وضعیت</label>
-                                    <select name="status" class="form-control select2input">
-                                        <option disabled selected>انتخاب کنید</option>
                                         <option value="active">فعال</option>
                                         <option value="deactive">غیرفعال</option>
                                     </select>

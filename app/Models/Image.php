@@ -5,10 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Baner extends Model
+class Image extends Model
 {
-    public function image()
-    {
-        return $this->belongsTo('Image::class');
-    }
+    use HasFactory;
 }
