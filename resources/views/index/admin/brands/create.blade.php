@@ -1,4 +1,7 @@
 @extends('template.admin.layout')
+@section('styles')
+<link href="{{asset('admin/assets/css/dropzone.css')}}" rel="stylesheet" type="text/css">
+@endsection
 @section('content')
     <div class="layout-specing">
         <div class="d-md-flex justify-content-between">
@@ -15,7 +18,17 @@
         <div class="row">
             <div class="col-md-12 ">
                 <div class="card border-0 p-4 rounded shadow">
-                    <form >
+                    @if($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach($errors->all() as $error )
+                                    <li>{{$error}}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    <form action="{{url('admin/brands')}}" method="post">
+                        @csrf
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
@@ -32,11 +45,13 @@
                             </div>
 
                             <div class="col-md-12">
-                                <div class="mb-3">
-                                    <label class="form-label">لوگو برند</label>
-                                    <input type="file" name="image">
+                                <input type="hidden" name="image_id" id="BrandImage">
+                                    <label class="form-label">نمایه برند</label>
+                                <div id="image_brand" class="mb-3 dropzone">
                                 </div>
                             </div>
+
+
                         </div><!--end row-->
 
                         <button type="submit" class="btn btn-primary">افزودن برند</button>
@@ -47,4 +62,21 @@
     </div>
 
 
+@endsection
+@section('scripts')
+    <script type="text/javascript" src="{{asset('admin/assets/js/dropzone.js')}}"></script>
+    <script>
+        Dropzone.autoDiscover=false;
+        var drop=new Dropzone('#image_brand', {
+            maxFiles:1,
+            addRemoveLinks:true,
+            url:"{{route('brandImage.Upload')}}",
+            sending:function (file,xhr,formDAta){
+                formDAta.append("_token","{{csrf_token()}}")
+            },
+            success:function (file,response){
+               document.getElementById('BrandImage').value=response.image_brandId
+            }
+        });
+    </script>
 @endsection

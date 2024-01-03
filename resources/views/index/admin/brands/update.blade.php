@@ -15,19 +15,21 @@
         <div class="row">
             <div class="col-md-12 ">
                 <div class="card border-0 p-4 rounded shadow">
-                    <form >
+                    <form action="{{route('brands.update',$brand->id)}}" method="post" >
+                        {{csrf_field()}}
+                        {{method_field('PATCH')}}>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label class="form-label"> نام</label>
-                                    <input name="name" id="name" type="text" class="form-control" >
+                                    <input name="name" id="name" type="text" class="form-control" value="{{$brand->name}}">
                                 </div>
                             </div><!--end col-->
 
                             <div class="col-md-12">
                                 <div class="mb-3">
                                     <label class="form-label">توضیحات برند</label>
-                                    <textarea name="description" id="comments" rows="3" class="form-control"></textarea>
+                                    <textarea name="description" id="comments" rows="3" class="form-control">value={{$brand->description}}</textarea>
                                 </div>
                             </div>
                             <div class="col-md-12">
