@@ -15,7 +15,17 @@
                 <div class="row">
                     <div class="col-md-12 ">
                         <div class="card border-0 p-4 rounded shadow">
-                            <form >
+                            @if($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach($errors->all() as $error )
+                                            <li>{{$error}}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            <form action="{{url('admin/attributeGroups')}}" method="post">
+                                @csrf
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="mb-3">
@@ -27,7 +37,7 @@
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">نام</label>
-                                            <input name="name" id="name2" type="text" class="form-control" placeholder="لینک :">
+                                            <input name="name" id="name2" type="text" class="form-control" placeholder="نام:">
                                         </div>
                                     </div><!--end col-->
 
