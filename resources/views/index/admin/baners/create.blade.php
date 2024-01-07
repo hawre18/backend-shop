@@ -18,6 +18,7 @@
                 <div class="row">
                     <div class="col-md-12 ">
                         <div class="card border-0 p-4 rounded shadow">
+
                                        @if($errors->any())
                                            <div class="alert alert-danger">
                                            <ul>
@@ -27,8 +28,12 @@
                                            </ul>
                                            </div>
                                        @endif
-                                    <form action="{{url('admin/baners')}}" method="post">
-                                          @csrf
+                                  
+
+                            <form action="{{url('admin/baners')}}" method="post" enctype="multipart/form-data">
+                                @csrf
+                                <div class="row">
+
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">عنوان</label>
@@ -56,15 +61,17 @@
                                     <div class="col-md-12">
                                         <div class="mb-3">
                                             <label class="form-label">توضیحات بنر</label>
-                                            <textarea name="description" id="comments" rows="3" class="form-control"></textarea>
+                                            <textarea name="description" id="editor" rows="3" class="form-control"></textarea>
                                         </div>
                                     </div>
 
                                     <div class="col-md-12">
+
                                         <input type="hidden" name="image_id" id="BanerImage">
                                             <label class="form-label">عکس بنر</label>
                                             <div id="image_baner" class="mb-3 dropzone">
                                             <div class="mb-3 dropzone">
+
                                         </div>
                                     </div>
                                 </div><!--end row-->
@@ -76,6 +83,10 @@
          </div>
 @endsection
 @section('scripts')
+
+
+    <script src="{{asset('admin/assets/ckeditor/ckeditor.js')}}"></script>
+
     <script type="text/javascript" src="{{asset('admin/assets/js/dropzone.js')}}"></script>
     <script>
         Dropzone.autoDiscover=false;
@@ -83,6 +94,7 @@
             maxFiles:1,
             addRemoveLinks:true,
             url:"{{route('banerImage.upload')}}",
+
             sending:function (file,xhr,formData){
                 formData.append("_token","{{csrf_token()}}")
             },
@@ -90,5 +102,14 @@
                 document.getElementById('BanerImage').value=response.image_banerId
              }
         });
+
+
+        ClassicEditor
+            .create( document.querySelector( '#editor',{
+                
+            } ) )
+            .catch( error => {
+                console.error( error );
+            } );
     </script>
 @endsection

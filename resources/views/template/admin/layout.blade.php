@@ -31,7 +31,9 @@
     <link href="{{asset('admin/assets/css/tiny-slider.css')}}" rel="stylesheet">
     <link href="{{asset('admin/assets/css/slick.css')}}" rel="stylesheet">
     <link href="{{asset('admin/assets/css/slick-theme.css')}}" rel="stylesheet">
+
 @yield('styles')
+
 </head>
 
 <body>
@@ -162,6 +164,8 @@
 <!-- Modal end -->
 @yield('scripts')
 <!-- javascript -->
+
+@yield('scripts')
 <script src="{{asset('admin/assets/js/jquery.min.js')}}"></script>
 <script src="{{asset('admin/assets/js/bootstrap.bundle.min.js')}}"></script>
 <!-- simplebar -->

@@ -9,6 +9,10 @@ class Baner extends Model
 {
     public function image()
     {
+
         return $this->belongsTo('Image::class');
+
+     
+
     }
 }

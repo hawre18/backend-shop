@@ -4,17 +4,25 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Image;
+use http\Env\Response;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class ImageController extends Controller
 {
-    public function banerImageUpload(Request $request)
+
+   
+
+    public function brandImageUpload(Request $request)
     {
+
+
         $upload=$request->file('file');
         $originalName=$upload->getClientOriginalName();
         $filename=time().$originalName;
         Storage::disk('local')->putFileAs(
+
             'images' ,$upload,$filename
         );
         $image=new Image();
@@ -24,5 +32,8 @@ class ImageController extends Controller
         return response()->json([
             'image_banerId'=>$image->id
         ]);
+
+        
+
     }
 }

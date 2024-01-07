@@ -5,9 +5,11 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Baner;
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
 use Symfony\Component\HttpFoundation\Response;
+
 
 class BanerController extends Controller
 {
@@ -50,6 +52,7 @@ class BanerController extends Controller
      */
     public function store(Request $request)
     {
+
         $this->validate(request(),[
                  'title'=>'required|min:3|max:100|regex:/^[ آابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهیئ\s]+$/',
 
@@ -68,6 +71,9 @@ class BanerController extends Controller
             Session::flash('baner_error','خطا در ذخیره سازی');
             return redirect('admin/baners/create');
         }
+
+      
+
     }
 
     /**
