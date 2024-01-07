@@ -32,8 +32,8 @@
     <link href="{{asset('admin/assets/css/slick.css')}}" rel="stylesheet">
     <link href="{{asset('admin/assets/css/slick-theme.css')}}" rel="stylesheet">
 
-    <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.js"></script>
-    @yield('styles')
+@yield('styles')
+
 </head>
 
 <body>
@@ -143,10 +143,6 @@
             </div>
         </div>
         <div class="container-fluid">
-
-
-
-
 @yield('content')
                 <!-- Footer Start -->
                 <footer class="bg-white shadow py-3">
@@ -166,7 +162,7 @@
 </div>
 <!-- page-wrapper -->
 <!-- Modal end -->
-
+@yield('scripts')
 <!-- javascript -->
 
 @yield('scripts')
@@ -186,15 +182,6 @@
 <script src="{{asset('admin/assets/js/tiny-slider-init.js')}}"></script>
 <script src="{{asset('admin/assets/js/slick.min.js')}}"></script>
 <script src="{{asset('admin/assets/js/slick.init.js')}}"></script>
-
-<script>
-       classicEditor
-                     .create(document.querySelector('#comments'))
-                     .catch(error =>{
-                         console.error(error);
-                     });
-
-</script>
 
 </body>
 

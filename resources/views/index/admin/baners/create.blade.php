@@ -18,16 +18,28 @@
                 <div class="row">
                     <div class="col-md-12 ">
                         <div class="card border-0 p-4 rounded shadow">
+
+                                       @if($errors->any())
+                                           <div class="alert alert-danger">
+                                           <ul>
+                                               @foreach($errors->all() as $error)
+                                                   <li>{{$error}}</li>
+                                               @endforeach
+                                           </ul>
+                                           </div>
+                                       @endif
+                                  
+
                             <form action="{{url('admin/baners')}}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
+
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label class="form-label"> عنوان</label>
-                                            <input name="title" id="name" type="text" class="form-control" placeholder="عنوان">
+                                            <label class="form-label">عنوان</label>
+                                            <input name="title" id="name2" type="text" class="form-control" placeholder="عنوان :">
                                         </div>
                                     </div><!--end col-->
-
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">لینک</label>
@@ -54,9 +66,12 @@
                                     </div>
 
                                     <div class="col-md-12">
-                                        <label class="form-label">عکس بنر</label>
+
                                         <input type="hidden" name="image_id" id="BanerImage">
-                                        <div id="image_baner" class="mb-3 dropzone">
+                                            <label class="form-label">عکس بنر</label>
+                                            <div id="image_baner" class="mb-3 dropzone">
+                                            <div class="mb-3 dropzone">
+
                                         </div>
                                     </div>
                                 </div><!--end row-->
@@ -68,7 +83,10 @@
          </div>
 @endsection
 @section('scripts')
+
+
     <script src="{{asset('admin/assets/ckeditor/ckeditor.js')}}"></script>
+
     <script type="text/javascript" src="{{asset('admin/assets/js/dropzone.js')}}"></script>
     <script>
         Dropzone.autoDiscover=false;
@@ -76,13 +94,15 @@
             maxFiles:1,
             addRemoveLinks:true,
             url:"{{route('banerImage.upload')}}",
-           sending:function (file,xhr,formDAta){
-                formDAta.append("_token","{{csrf_token()}}")
-           },
+
+            sending:function (file,xhr,formData){
+                formData.append("_token","{{csrf_token()}}")
+            },
             success:function (file,response){
                 document.getElementById('BanerImage').value=response.image_banerId
-            }
+             }
         });
+
 
         ClassicEditor
             .create( document.querySelector( '#editor',{
